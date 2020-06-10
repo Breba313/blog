@@ -1,69 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
+@section('content')
+<div class="container">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -80,21 +18,52 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+                <div id="colorlib-page">
+                    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+                    <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+                        <nav id="colorlib-main-menu" role="navigation">
+                            <ul>
+                                <li class="colorlib-active"><a href="{{ url('/') }}">Home</a></li>
+                            </ul>
+                        </nav>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                       
+                    </aside> <!-- END COLORLIB-ASIDE -->
+                    <div id="colorlib-main">
+                        <section class="ftco-section ftco-no-pt ftco-no-pb">
+                            <div class="container">
+                                <div class="row d-flex">
+                                    <div class="col-xl-12 py-5 px-md-5">
+                                        <div class="row pt-md-4">
+                                        @foreach ($posts as $post)
+                                            <div class="col-md-12">
+                                                <div class="blog-entry ftco-animate d-md-flex">
+                                                    <div class="text text-2 pl-md-4">
+                                                        <h3 class="mb-2"><a href="{{ url('post/'.$post->id) }}">{{ $post->title }}</a></h3>
+                                                        <div class="meta-wrap">
+                                                        <p class="meta">
+                                                            <span><i class="icon-calendar mr-2"></i>{{ $post->publication_date }}</span>
+                                                        </p>
+                                                        </div>
+                                                        <p class="mb-4">{{ Str::limit($post->description, 150, '...') }}</p>
+                                                        <p><a href="{{ url('post/'.$post->id) }}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        </div>
+                                        <!-- END-->
+                                    </div>
+                                    <!-- END COL -->
+                                </div>
+                            </div>
+                        </section>
+                    </div><!-- END COLORLIB-MAIN -->
+                </div><!-- END COLORLIB-PAGE -->
+
+                <!-- loader -->
+                <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
             </div>
         </div>
-    </body>
-</html>
+</div>
+@endsection

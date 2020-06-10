@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ImportPosts::class,
     ];
 
     /**
@@ -24,7 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
+         $schedule->command('importPosts')
+                    ->everyMinute();
         //          ->hourly();
     }
 
